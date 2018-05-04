@@ -102,15 +102,16 @@ $(document).ready(function(){
 
           datasets: [{
               label: "My First dataset",
-              //backgroundColor: 'rgb(255, 99, 132)',
+              backgroundColor:['red','Yellow' ,'Blue' , 'green'] ,
               borderColor: 'rgb(255, 99, 132)',
               data: [25,25,25,25]
           }],
           labels: [
-        'Red',
-        'Yellow',
-        'Blue',
-        'green'
+        'Marco',
+        'Giuseppe',
+        "Riccardo",
+        "Roberto",
+
 
     ]
 
