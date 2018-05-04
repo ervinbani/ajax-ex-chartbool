@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
   var somma=[0,0,0,0,0,0,0,0,0,0,0,0];
+  var venditori=[];
+  var statistiche=[];
   $.ajax({
           url:'http://138.68.64.12:3012/sales',
           method:'GET',
@@ -14,13 +16,49 @@ $(document).ready(function(){
                           somma[j-1]+=data[i]['amount'];
                       }
                   }
-
+              }
+              for(var i=0;i<data.length;i++){
+                  var venditore=data[i]['salesman'];
+                  if(!venditori.includes(venditore)){
+                      venditori.push(venditore);
+                  }
 
               }
+              //inizializzo a zero l'array statistiche
+              for (var i = 0; i < venditori.length; i++) {
+                statistiche.push(0);
+              }
+              //ciclo for che somma le singole per venditore e inserisce la somma in un array statisriche
+              for(var i=0;i<data.length;i++){
+                  var venditore=data[i]['salesman'];
+                  var venditaSingola=data[i]['amount'];
+                  for(var j=0;j<statistiche.length;j++){
+                      if(venditori.includes(venditore)){
+                          statistiche[j]+=venditaSingola;
+                      }
+                  }
+              }
+              //ciclo for che somma il totale venduto da tutti i venditori
+              var totVendite=0;
+              for(var i=0;i<statistiche.length;i++){
+                  totVendite+=statistiche[i];
+              }
+              //ciclo che trasforma le singole vendite in percentuali rispetto al totale
+              var percentuali_Vendite=[];
+              for(var i=0;i<statistiche.length;i++){
+                  percentuali_Vendite.push(statistiche[i]/totVendite*100);
+              }
+
+              console.log('venditori', venditori);
+              console.log('vendite', statistiche);
+              console.log('totvendite', totVendite);
+              console.log('percentuali_Vendite', percentuali_Vendite);
+
               console.log('mese', somma);
-              MyChart();
-
-
+              //funzione che stampa il grafico a linea
+              MyChartLine();
+              //funzione che stampa un grafico a torta
+              MyChartPie();
 
           },
           error:function(){
@@ -28,7 +66,7 @@ $(document).ready(function(){
           }
 
   });
-  function MyChart(){
+  function MyChartLine(){
   var ctx = document.getElementById('myChart').getContext('2d');
   var chart = new Chart(ctx, {
       // The type of chart we want to create
@@ -44,12 +82,25 @@ $(document).ready(function(){
               data: somma,
           }]
       },
-
-
-
-
-
     });
-    }
+  }
+  function MyChartPie(){
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'pie',
+
+      // The data for our dataset
+      data: {
+          labels: venditori,
+          datasets: [{
+              label: "My First dataset",
+              //backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: [25,25,25,25],
+          }]
+      },
+    });
+  }
 
 });
