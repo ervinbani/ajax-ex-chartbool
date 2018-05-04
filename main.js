@@ -85,14 +85,20 @@ $(document).ready(function(){
     });
   }
   function MyChartPie(){
-  var ctx = document.getElementById('myChart').getContext('2d');
+  var ctx = document.getElementById('myChart2').getContext('2d');
   var chart = new Chart(ctx, {
       // The type of chart we want to create
       type: 'pie',
 
       // The data for our dataset
       data: {
-          labels: venditori,
+          labels: [{
+        Marco:'Red',
+        Giuseppe:'Yellow',
+        Riccardo:'Blue',
+        Roberto:'green'
+        }
+    ],
           datasets: [{
               label: "My First dataset",
               //backgroundColor: 'rgb(255, 99, 132)',
