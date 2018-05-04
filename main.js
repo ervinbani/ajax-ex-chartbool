@@ -29,12 +29,13 @@ $(document).ready(function(){
                 statistiche.push(0);
               }
               //ciclo for che somma le singole per venditore e inserisce la somma in un array statisriche
-              for(var i=0;i<data.length;i++){
-                  var venditore=data[i]['salesman'];
-                  var venditaSingola=data[i]['amount'];
-                  for(var j=0;j<statistiche.length;j++){
-                      if(venditori.includes(venditore)){
-                          statistiche[j]+=venditaSingola;
+              
+              for(var i=0;i<venditori.length;i++){
+                  for(var j=0;j<data.length;j++){
+                      var venditore=data[j]['salesman'];
+                      var venditaSingola=data[j]['amount'];
+                      if(venditori[i]==venditore){
+                          statistiche[i]+=venditaSingola;
                       }
                   }
               }
@@ -57,7 +58,7 @@ $(document).ready(function(){
 
 
               console.log('venditori', venditori);
-              console.log('vendite', statistiche);
+              console.log('statistiche', statistiche);
               console.log('totvendite', totVendite);
               console.log('percentuali_Vendite', percentuali_Vendite);
 
@@ -81,7 +82,7 @@ $(document).ready(function(){
 
       // The data for our dataset
       data: {
-          labels: ["January", "February", "March", "April", "May", "June", "July", "Ago", "Set", "Ott", "Nov", "dic"],
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Ago", "Set", "Ott", "Nov", "dic"],
           datasets: [{
               label: "My First dataset",
               //backgroundColor: 'rgb(255, 99, 132)',
