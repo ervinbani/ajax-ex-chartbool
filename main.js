@@ -48,6 +48,13 @@ $(document).ready(function(){
               for(var i=0;i<statistiche.length;i++){
                   percentuali_Vendite.push(statistiche[i]/totVendite*100);
               }
+              var obj={
+           Marco:'Red',
+           Giuseppe:'Yellow',
+           Riccardo:'Blue',
+           Roberto:'green'
+           }
+
 
               console.log('venditori', venditori);
               console.log('vendite', statistiche);
@@ -88,24 +95,26 @@ $(document).ready(function(){
   var ctx = document.getElementById('myChart2').getContext('2d');
   var chart = new Chart(ctx, {
       // The type of chart we want to create
-      type: 'pie',
+      type: 'doughnut',
 
       // The data for our dataset
-      data: {
-          labels: [{
-        Marco:'Red',
-        Giuseppe:'Yellow',
-        Riccardo:'Blue',
-        Roberto:'green'
-        }
-    ],
+      data:{
+
           datasets: [{
               label: "My First dataset",
               //backgroundColor: 'rgb(255, 99, 132)',
               borderColor: 'rgb(255, 99, 132)',
-              data: [25,25,25,25],
-          }]
-      },
+              data: [25,25,25,25]
+          }],
+          labels: [
+        'Red',
+        'Yellow',
+        'Blue',
+        'green'
+
+    ]
+
+      }
     });
   }
 
