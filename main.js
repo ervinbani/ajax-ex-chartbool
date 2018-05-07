@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  //ogetto dove salvare le vendite per ogni mese
   var statisticaMensile = {
     "January" : 0,
     "February": 0,
@@ -14,7 +14,7 @@ $(document).ready(function(){
     "November": 0,
     "December": 0,
   }
-
+  //oggetto per salvare le vendite di ogni venditore
   var totVenditore = {
     "Marco": 0,
     "Giuseppe":0,
@@ -29,11 +29,12 @@ $(document).ready(function(){
     "terzoTrimestre" : 0,
     "quartoTrimestre" : 0,
   }
+  //variabili dove salvare le singole vendite e il totale
   var singolaVendita;
   var totVendite = 0;
   var venditore;
 
-
+  //variabili dove salvare le percentuali delle vendite per ogni venditore
   var percentualeMarco;
   var percentualeGiuseppe;
   var percentualeRiccardo;
@@ -48,21 +49,21 @@ $(document).ready(function(){
       success:function(data) {
         console.log(data);
         for (var i = 0; i < data.length; i ++) {
-          var dateVendita = moment(data[i].date,'DD, MM, YYYY').month();
-          console.log('mese di vedita', dateVendita);
-          singolaVendita = parseInt(data[i].amount);
-          // Invoco la funzione sumMonthSales che fa la somma degli amount dei
-          venditaMensile(dateVendita);
-          totVendite+= singolaVendita;
-          console.log('totali delle vendite', totVendite);
-          venditore = data[i].salesman;
-          console.log(venditore);
-          // Invoco la funzione statisticheVenditore
-          statisticheVenditore(venditore);
-          // invoco la funziona
-          venditeTrimestrali(dateVendita);
+            var dateVendita = moment(data[i].date,'DD, MM, YYYY').month();
+            console.log('mese di vedita', dateVendita);
+            singolaVendita = parseInt(data[i].amount);
+            // Invoco la funzione
+            venditaMensile(dateVendita);
+            totVendite+= singolaVendita;
+            console.log('totali delle vendite', totVendite);
+            venditore = data[i].salesman;
+            console.log(venditore);
+            // Invoco la funzione statisticheVenditore
+            statisticheVenditore(venditore);
+            // invoco la funziona
+            venditeTrimestrali(dateVendita);
         }
-        // creazione chartLine con chart.js plugin
+        // creazione chart con chart.js plugin
         MychartLine();
 
         MychartPie();
