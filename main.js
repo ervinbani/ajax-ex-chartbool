@@ -218,7 +218,6 @@ $(document).ready(function(){
                     borderColor: 'rgb(255, 99, 132)',
                     pointBorderWidth: 3,
                     pointHoverBorderWidth: 3,
-                    lineTension: 0,
                     data: [statisticaMensile.January,statisticaMensile.February,statisticaMensile.March,statisticaMensile.April,statisticaMensile.May,
                           statisticaMensile.June,statisticaMensile.July,statisticaMensile.August,statisticaMensile.September,
                           statisticaMensile.October,statisticaMensile.November,statisticaMensile.December],
