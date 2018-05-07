@@ -1,33 +1,33 @@
 $(document).ready(function(){
   //ogetto dove salvare le vendite per ogni mese
   var statisticaMensile = {
-    "January" : 0,
-    "February": 0,
-    "March": 0,
-    "April": 0,
-    "May": 0,
-    "June": 0,
-    "July": 0,
-    "August":0,
-    "September": 0,
-    "October": 0,
-    "November": 0,
-    "December": 0,
+      "January" : 0,
+      "February": 0,
+      "March": 0,
+      "April": 0,
+      "May": 0,
+      "June": 0,
+      "July": 0,
+      "August":0,
+      "September": 0,
+      "October": 0,
+      "November": 0,
+      "December": 0,
   }
   //oggetto per salvare le vendite di ogni venditore
   var totVenditore = {
-    "Marco": 0,
-    "Giuseppe":0,
-    "Riccardo":0,
-    "Roberto":0,
+      "Marco": 0,
+      "Giuseppe":0,
+      "Riccardo":0,
+      "Roberto":0,
   }
 
   // creo un oggetto per i valori di ogni trimestre
   var totTrimestre = {
-    "primoTrimestre" : 0,
-    "secondoTrimestre" : 0,
-    "terzoTrimestre" : 0,
-    "quartoTrimestre" : 0,
+      "primoTrimestre" : 0,
+      "secondoTrimestre" : 0,
+      "terzoTrimestre" : 0,
+      "quartoTrimestre" : 0,
   }
   //variabili dove salvare le singole vendite e il totale
   var singolaVendita;
@@ -69,6 +69,7 @@ $(document).ready(function(){
         MychartPie();
 
         MychartBar();
+        cancellaElemento(idDaCanc)
 
       },
   });
@@ -96,15 +97,16 @@ $(document).ready(function(){
       },
     });
   });
-  $(document).on('click', '#del', function(){
-      idDaCanc=$('#cancel').val();
-
-      cancellaElemento(idDaCanc);
-});
+  //funzione che cancella un elemento dal database con una chiamata DELETE
   function cancellaElemento(idDaCanc){
+    $(document).on('click', '#del', function(){
+        idDaCanc=$('#cancel').val();
+
+        cancellaElemento(idDaCanc);
+
 
    $.ajax({
-      url: 'http://138.68.64.12:3012/sales/+idDaCanc',
+      url: 'http://138.68.64.12:3012/sales/'+idDaCanc,
       method: 'DELETE',
       success: function(data){
          console.log(data);
@@ -113,7 +115,8 @@ $(document).ready(function(){
          alert('Error!');
       }
    });
- }
+ });
+}
 
     // funzione che somma i guadagni complessivi dei venditori per ogni mensilità
     function venditaMensile(dateVendita) {
@@ -124,84 +127,84 @@ $(document).ready(function(){
 
         }*/
         if (dateVendita == 0) {
-          statisticaMensile.January += singolaVendita;
+            statisticaMensile.January += singolaVendita;
         }
         console.log(statisticaMensile.January + " January-amount")
         if (dateVendita == 1) {
-          statisticaMensile.February += singolaVendita;
+            statisticaMensile.February += singolaVendita;
         }
         if (dateVendita == 2) {
-          statisticaMensile.March += singolaVendita;
+            statisticaMensile.March += singolaVendita;
         }
         if (dateVendita == 3) {
-          statisticaMensile.April += singolaVendita;
+            statisticaMensile.April += singolaVendita;
         }
         if (dateVendita == 4) {
-          statisticaMensile.May += singolaVendita;
+            statisticaMensile.May += singolaVendita;
         }
         if (dateVendita == 5) {
-          statisticaMensile.June += singolaVendita;
+            statisticaMensile.June += singolaVendita;
         }
         if (dateVendita == 6) {
-          statisticaMensile.July += singolaVendita;
+            statisticaMensile.July += singolaVendita;
         }
         if (dateVendita == 7) {
-          statisticaMensile.August += singolaVendita;
+            statisticaMensile.August += singolaVendita;
         }
         if (dateVendita == 8) {
-          statisticaMensile.September += singolaVendita;
+            statisticaMensile.September += singolaVendita;
         }
         if (dateVendita == 9) {
-          statisticaMensile.October += singolaVendita;
+            statisticaMensile.October += singolaVendita;
         }
         if (dateVendita == 10) {
-          statisticaMensile.November += singolaVendita;
+            statisticaMensile.November += singolaVendita;
         }
         if (dateVendita == 11) {
-          statisticaMensile.December += singolaVendita;
+            statisticaMensile.December += singolaVendita;
         }
     }
     // funzione che somma i guadagni di ogni singolo venditore
     function statisticheVenditore(venditore) {
       if (venditore == "Marco") {
-        totVenditore.Marco += singolaVendita;
-        percentualeMarco = (totVenditore.Marco * 100) /totVendite;
+          totVenditore.Marco += singolaVendita;
+          percentualeMarco = (totVenditore.Marco * 100) /totVendite;
       }
       console.log(percentualeMarco + "marco");
 
       if (venditore == "Giuseppe") {
-        totVenditore.Giuseppe += singolaVendita;
-        percentualetGiuseppe= (totVenditore.Giuseppe * 100) /totVendite;
+          totVenditore.Giuseppe += singolaVendita;
+          percentualetGiuseppe= (totVenditore.Giuseppe * 100) /totVendite;
       }
 
       if (venditore == "Riccardo") {
-        totVenditore.Riccardo += singolaVendita;
-        percentualeRiccardo= (totVenditore.Riccardo * 100) /totVendite;
+          totVenditore.Riccardo += singolaVendita;
+          percentualeRiccardo= (totVenditore.Riccardo * 100) /totVendite;
       }
 
       if (venditore == "Roberto") {
-        totVenditore.Roberto += singolaVendita;
-        percentualeRoberto = (totVenditore.Roberto * 100) /totVendite;
+          totVenditore.Roberto += singolaVendita;
+          percentualeRoberto = (totVenditore.Roberto * 100) /totVendite;
       }
 
     }
     // funzione che somma i guadagni trimestrali dell'azienda(quarter)
     function venditeTrimestrali(dateVendita) {
         if (dateVendita == 0 || dateVendita == 1 || dateVendita == 2) {
-          totTrimestre.primoTrimestre++;
+            totTrimestre.primoTrimestre++;
         }
         console.log(totTrimestre.primoTrimestre + "primo trimestre")
         if (dateVendita == 3 || dateVendita == 4 || dateVendita == 5) {
-          totTrimestre.secondoTrimestre++;
+            totTrimestre.secondoTrimestre++;
         }
         console.log(totTrimestre.secondoTrimestre + "secondo trimestre")
 
         if (dateVendita == 6 || dateVendita == 7 || dateVendita == 8) {
-          totTrimestre.terzoTrimestre++;
+            totTrimestre.terzoTrimestre++;
         }
         console.log(venditeTrimestrali.terzoTrimestre + "terzo trimestre")
         if (dateVendita == 9 || dateVendita == 10 || dateVendita == 11) {
-          totTrimestre.quartoTrimestre++;
+            totTrimestre.quartoTrimestre++;
         }
         console.log(totTrimestre.quartoTrimestre + "quarto trimestre")
     }
@@ -240,7 +243,7 @@ $(document).ready(function(){
                   label: "Mensile",
                   // backgroundColor: 'rgb(255, 99, 132)',
                   borderColor: '#2E2E2E',
-                   backgroundColor: ['red','yellow','green','blue'],
+                  backgroundColor: ['red','yellow','green','blue'],
                   data: [percentualeMarco.toFixed(2),percentualetGiuseppe.toFixed(2),percentualeRiccardo.toFixed(2),percentualeRoberto.toFixed(2)],
               }]
             },
@@ -252,16 +255,16 @@ $(document).ready(function(){
     function MychartBar() {
       var ctxBar = document.getElementById('myChartBar').getContext('2d');
         var chartBar = new Chart(ctxBar, {
-          // The type of chart we want to create
-          type: 'bar',
-          // The data for our dataset
+            // The type of chart we want to create
+            type: 'bar',
+            // The data for our dataset
           data: {
               labels: ["Jan/Feb/Mar","Apr/May/Jun","Jul/Aug/Sep","Oct/Nov/Dec"],
               datasets: [{
                   label: "Statistiche trimestrali",
                   borderColor: ['red','yellow','green','blue'],
                   borderWidth: 2,
-                  backgroundColor: ['#dbf2f2', '#ffecd9', '#ffe0e6', '#ebe0ff'],
+                  backgroundColor: ['#ffecd9', '#dbf2f2', '#ffe0e6', '#ebe0ff'],
                   data: [totTrimestre.primoTrimestre,totTrimestre.secondoTrimestre,
                         totTrimestre.terzoTrimestre,totTrimestre.quartoTrimestre],
               }]
